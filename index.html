@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit Price Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Comparison Row -->
+  <div class="summary-container">
+    <div id="summaryRow" class="summary-row"></div>
+  </div>
+
+  <!-- Dynamic form -->
+  <div class="form-card">
+    <form id="priceForm" onsubmit="return false;">
+      <div class="form-stack">
+        
+        <div class="form-group">
+          <label for="inputPrice">💰 Price ($)</label>
+          <input type="number" id="inputPrice" step="0.01" min="0" placeholder="0.00" />
+          <span id="warningPrice" class="field-warning"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="inputSize">📐 Size</label>
+          <input type="number" id="inputSize" step="any" min="0" placeholder="10" />
+          <span id="warningSize" class="field-warning"></span>
+        </div>
+
+        <div class="form-group unit-group">
+          <div id="unitSelector" class="unit-selector"></div>
+          <span id="warningUnit" class="field-warning"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="inputQty">📦 Packs</label>
+          <input type="number" id="inputQty" min="1" step="1" value="1" />
+          <span id="warningQty" class="field-warning"></span>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="btnSave" class="btn btn-primary">Add to List</button>
+          <button type="button" id="btnDelete" class="btn btn-danger" style="display: none;">Delete</button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+  <!-- Entry Point using ES Modules -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
