@@ -2,9 +2,9 @@ export const CONVERSIONS = {
   // Mass
   g: { category: 'mass', label: 'g', toBase: 1 },
   oz: { category: 'mass', label: 'oz', toBase: 28.3495 },
-  lbs: { category: 'mass', label: 'lbs', toBase: 453.592 },
-  catty: { category: 'mass', label: 'catty 斤', toBase: 604.79 },
-  tael: { category: 'mass', label: 'tael 兩', toBase: 37.80 },
+  lb: { category: 'mass', label: 'lb', toBase: 453.592 },
+  catty: { category: 'mass', label: 'catty 斤', toBase: 604.78982 },
+  tael: { category: 'mass', label: 'tael 兩', toBase: 37.7994 },
 
   // Volume
   ml: { category: 'vol', label: 'ml', toBase: 1 },

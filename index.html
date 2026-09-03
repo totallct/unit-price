@@ -20,13 +20,13 @@
         
         <div class="form-group">
           <label for="inputPrice">💰 Price ($)</label>
-          <input type="number" id="inputPrice" step="0.01" min="0" placeholder="0.00" />
+          <input type="number" id="inputPrice" inputmode="decimal" step="0.01" min="0" placeholder="0.00" />
           <span id="warningPrice" class="field-warning"></span>
         </div>
 
         <div class="form-group">
           <label for="inputSize">📐 Size</label>
-          <input type="number" id="inputSize" step="any" min="0" placeholder="10" />
+          <input type="number" id="inputSize" inputmode="decimal" step="any" min="0" placeholder="10" />
           <span id="warningSize" class="field-warning"></span>
         </div>
 
@@ -37,7 +37,7 @@
 
         <div class="form-group">
           <label for="inputQty">📦 Packs</label>
-          <input type="number" id="inputQty" min="1" step="1" value="1" />
+          <input type="number" id="inputQty" inputmode="decimal" min="1" step="1" value="1" />
           <span id="warningQty" class="field-warning"></span>
         </div>
 
