@@ -47,33 +47,54 @@ export function updateCalculatedDisplays() {
 }
 
 export function renderForm() {
-  const activeItem = state.editingIndex >= 0 ? state.items[state.editingIndex] : state.draftItem;
-  
+  const isEditing = state.editingIndex >= 0;
+  const hasItems = state.items.length > 0;
+  const activeItem = isEditing ? state.items[state.editingIndex] : state.draftItem;
+
+  // 1. Button States
   const btnSave = document.getElementById('btnSave');
   const btnDelete = document.getElementById('btnDelete');
+  const btnClearAll = document.getElementById('btnClearAll');
 
-  btnSave.innerText = state.editingIndex >= 0 ? 'Update' : 'Add to List';
-  btnDelete.style.display = state.editingIndex >= 0 ? 'block' : 'none';
-  btnDelete.innerText = 'Delete';
+  if (btnSave) {
+    btnSave.innerText = isEditing ? 'Update' : 'Add to List';
+  }
 
-  document.getElementById('inputPrice').value = activeItem.price;
-  document.getElementById('inputSize').value = activeItem.size;
-  document.getElementById('inputQty').value = activeItem.qty;
+  if (btnDelete) {
+    // Show single item delete ONLY when editing
+    btnDelete.style.display = isEditing ? 'inline-flex' : 'none';
+    btnDelete.innerText = 'Delete';
+  }
 
+  if (btnClearAll) {
+    // Show Clear All ONLY when NOT editing and items exist
+    btnClearAll.style.display = (!isEditing && hasItems) ? 'inline-flex' : 'none';
+  }
+
+  // 2. Populate Field Values
+  document.getElementById('inputPrice').value = activeItem.price ?? '';
+  document.getElementById('inputSize').value = activeItem.size ?? '';
+  document.getElementById('inputQty').value = activeItem.qty ?? 1;
+
+  // 3. Trigger Validation
   ['price', 'size', 'unit', 'qty'].forEach(f => validateField(f, activeItem[f]));
 
+  // 4. Category Locking & Unit Selector Rendering
   const activeUnitItem = state.items.find(i => i.unit !== '');
   const lockedCat = activeUnitItem ? CONVERSIONS[activeUnitItem.unit]?.category : null;
 
   const unitSelector = document.getElementById('unitSelector');
-  unitSelector.innerHTML = Object.keys(CONVERSIONS).filter(u => {
-    if (!lockedCat) return true;
-    return CONVERSIONS[u].category === lockedCat;
-  }).map(u => `
-    <button type="button" class="unit-btn ${activeItem.unit === u ? 'selected' : ''}" data-action="select-unit" data-unit="${u}">
-      ${CONVERSIONS[u].label}
-    </button>
-  `).join('');
+  if (unitSelector) {
+    unitSelector.innerHTML = Object.keys(CONVERSIONS).filter(u => {
+      if (!lockedCat) return true;
+      return CONVERSIONS[u].category === lockedCat;
+    }).map(u => `
+      <button type="button" class="unit-btn ${activeItem.unit === u ? 'selected' : ''}" data-action="select-unit" data-unit="${u}">
+        ${CONVERSIONS[u].label}
+      </button>
+    `).join('');
+  }
 
+  // 5. Refresh Calculated Cards & Highlights
   updateCalculatedDisplays();
 }

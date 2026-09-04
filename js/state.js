@@ -12,23 +12,15 @@ export function parseHash() {
     state.items = [];
     return;
   }
-  
-  const parsed = [];
-  const validUnits = Object.keys(CONVERSIONS).join('|');
-  const unitRegex = new RegExp(`^([\\d\\.]+)(` + validUnits + `)$`);
 
+  const validUnits = Object.keys(CONVERSIONS).join('|');
+  const unitRegex = new RegExp(`^([\\d.]+)-([\\d.]+)(${validUnits})(\\d*)$`);
+
+  const parsed = [];
   hash.split('/').forEach(row => {
-    const parts = row.split('-');
-    if (parts.length === 2) {
-      const match = parts[1].match(unitRegex);
-      if (match) {
-        parsed.push({ price: parseFloat(parts[0]) || '', qty: 1, size: parseFloat(match[1]) || '', unit: match[2] });
-      }
-    } else if (parts.length === 3) {
-      const match = parts[2].match(unitRegex);
-      if (match) {
-        parsed.push({ price: parseFloat(parts[0]) || '', qty: parseInt(parts[1], 10) || 1, size: parseFloat(match[1]) || '', unit: match[2] });
-      }
+    const match = row.match(unitRegex);
+    if (match) {
+      parsed.push({ price: match[1], size: match[2], unit: match[3], qty: parseInt(match[4], 10) || 1 });
     }
   });
   state.items = parsed;
@@ -40,8 +32,8 @@ export function syncUrl() {
     history.replaceState(null, null, ' ');
   } else {
     const hashStr = validItems.map(i => {
-      const q = (i.qty && i.qty !== 1) ? `${i.qty}-` : '';
-      return `${i.price}-${q}${i.size}${i.unit}`;
+      const q = (i.qty && i.qty !== 1) ? i.qty : '';
+      return `${i.price}-${i.size}${i.unit}${q}`;
     }).join('/');
     window.location.hash = hashStr;
   }

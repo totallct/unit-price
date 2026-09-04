@@ -113,6 +113,20 @@ function bindEvents() {
   });
 }
 
+const btnClearAll = document.getElementById('btnClearAll');
+if (btnClearAll) {
+  btnClearAll.addEventListener('click', () => {
+    if (state.items.length === 0) return;
+
+    // Reset items array and editing index
+    state.items = [];
+    state.editingIndex = -1;
+
+    // Refresh UI to update cards and form button states
+    renderForm();
+  });
+}
+
 // Initial Run
 parseHash();
 bindEvents();

@@ -1,56 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Unit Price Calculator</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Top Comparison Row -->
+  <!-- Top Item Cards Section -->
   <div class="summary-container">
     <div id="summaryRow" class="summary-row"></div>
   </div>
 
-  <!-- Dynamic form -->
+  <!-- Form Grouped Container -->
   <div class="form-card">
     <form id="priceForm" onsubmit="return false;">
       <div class="form-stack">
         
         <div class="form-group">
-          <label for="inputPrice">💰 Price ($)</label>
-          <input type="number" id="inputPrice" inputmode="decimal" step="0.01" min="0" placeholder="0.00" />
+          <label for="inputPrice">Price</label>
+          <input type="number" id="inputPrice" step="0.01" min="0" placeholder="0.00" inputmode="decimal" />
           <span id="warningPrice" class="field-warning"></span>
         </div>
 
         <div class="form-group">
-          <label for="inputSize">📐 Size</label>
-          <input type="number" id="inputSize" inputmode="decimal" step="any" min="0" placeholder="10" />
+          <label for="inputSize">Size</label>
+          <input type="number" id="inputSize" step="any" min="0" placeholder="30" inputmode="decimal" />
           <span id="warningSize" class="field-warning"></span>
         </div>
 
         <div class="form-group unit-group">
+          <label>Unit</label>
           <div id="unitSelector" class="unit-selector"></div>
           <span id="warningUnit" class="field-warning"></span>
         </div>
 
         <div class="form-group">
-          <label for="inputQty">📦 Packs</label>
-          <input type="number" id="inputQty" inputmode="decimal" min="1" step="1" value="1" />
+          <label for="inputQty">Packs</label>
+          <input type="number" id="inputQty" min="1" step="1" value="1" inputmode="numeric" />
           <span id="warningQty" class="field-warning"></span>
         </div>
 
+        <!-- Form Actions -->
         <div class="form-actions">
-          <button type="button" id="btnSave" class="btn btn-primary">Add to List</button>
+          <button type="button" id="btnSave" class="btn btn-primary btn-sm">Add to List</button>
           <button type="button" id="btnDelete" class="btn btn-danger" style="display: none;">Delete</button>
+          <button type="button" id="btnClearAll" class="btn btn-danger" style="display: none;">Clear All</button>
         </div>
 
       </div>
     </form>
   </div>
 
-  <!-- Entry Point using ES Modules -->
   <script type="module" src="js/main.js"></script>
 </body>
 </html>
