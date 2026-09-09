@@ -86,7 +86,7 @@ function bindEvents() {
 
     if (state.editingIndex === -1) {
       state.items.push({ ...state.draftItem });
-      state.draftItem = { price: '', size: '', unit: state.draftItem.unit, qty: 1 };
+      state.draftItem = { price: '', size: '', unit: state.draftItem.unit, qty: '' };
     }
     state.editingIndex = -1;
     syncUrl();
