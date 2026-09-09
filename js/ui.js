@@ -74,7 +74,7 @@ export function renderForm() {
   // 2. Populate Field Values
   document.getElementById('inputPrice').value = activeItem.price ?? '';
   document.getElementById('inputSize').value = activeItem.size ?? '';
-  document.getElementById('inputQty').value = activeItem.qty ?? 1;
+  document.getElementById('inputQty').value = activeItem.qty ?? '';
 
   // 3. Trigger Validation
   ['price', 'size', 'unit', 'qty'].forEach(f => validateField(f, activeItem[f]));

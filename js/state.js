@@ -3,7 +3,7 @@ import { CONVERSIONS } from './units.js';
 export const state = {
   items: [],
   editingIndex: -1, // -1 indicates "Add New Item" mode
-  draftItem: { price: '', size: '', unit: '', qty: 1 }
+  draftItem: { price: '', size: '', unit: '', qty: '' }
 };
 
 export function parseHash() {
